@@ -6,6 +6,7 @@
 #include "Paladin.h"
 #include "Ranger.h"
 #include "Warrior.h"
+#include "Mage.h"
 #include "Adventurers.h"
 
 class Guild
@@ -17,6 +18,7 @@ private:
 	std::string _name;
 
 	int _gold = 0;
+
 public:
 	Guild(std::string name);
 	~Guild();

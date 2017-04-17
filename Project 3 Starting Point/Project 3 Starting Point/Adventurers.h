@@ -16,4 +16,3 @@ public:
 	std::string virtual Attack() { return _name + "Attacks!"; }
 
 };
-
