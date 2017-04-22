@@ -19,6 +19,14 @@ private:
 
 	int _gold = 0;
 
+	int RangerC = 0;
+
+	int WarriorC = 0;
+
+	int PaladinC = 0;
+
+	int MageC = 0;
+
 public:
 	Guild(std::string name);
 	~Guild();
@@ -28,6 +36,14 @@ public:
 	void AddAdventurer(std::shared_ptr<Adventurers> newAdventurer);
 
 	std::string GetInfo();
+
+	std::string AttackWithMages();
+
+	std::string AttackWithPaladins();
+
+	std::string AttackWithRangers();
+
+	std::string AttackWithWarriors();
 
 	std::string AttackWithAllAdventurers();
 

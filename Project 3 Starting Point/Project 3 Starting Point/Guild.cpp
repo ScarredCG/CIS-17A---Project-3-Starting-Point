@@ -1,5 +1,10 @@
 #include "Guild.h"
-#include <algorithm>
+#include <iostream>
+#include <memory>
+#include <iterator>
+
+using namespace std;
+
 Guild::Guild(std::string name) : _name(name)
 {
 }
@@ -13,22 +18,159 @@ void Guild::AddAdventurer(std::shared_ptr<Adventurers> newAdventurer)
 	_adventurers.push_back(newAdventurer);
 }
 
-std::string Guild::GetInfo()
+string Guild::GetInfo() //Thank you for going over this in class. I could not figure this part out.
 {
-	std::string output = "Your guild has: \n";	
 
-	//Fix this
-	
-	//output += _mages.size()		> 0 ? std::to_string(_mages.size()) + " mages\n" : "No mages!\n";
-	//output += _rangers.size()	> 0 ? std::to_string(_rangers.size()) + " rangers\n" : "No rangers!\n";
-	//output += _warriors.size()	> 0 ? std::to_string(_warriors.size()) + " warriors\n" : "No warriors!\n";
-	//output += _paladins.size()	> 0 ? std::to_string(_paladins.size()) + " paladins\n" : "No paladins!\n";
+	string output = "Your guild has: \n";
+
+	int MageCount = RangerC = WarriorC = PaladinC = 0;
+
+	for (vector<shared_ptr<Adventurers>>::iterator it = _adventurers.begin(); it != _adventurers.end(); it++)
+	{
+
+		if (dynamic_pointer_cast<Mage>(*it) != nullptr)
+		{
+
+			MageC++;
+
+		}
+
+		else if (dynamic_pointer_cast<Ranger>(*it) != nullptr)
+		{
+
+			RangerC++;
+
+		}
+
+		else if (dynamic_pointer_cast<Warrior>(*it) != nullptr)
+		{
+
+			WarriorC++;
+
+		}
+
+		else if (dynamic_pointer_cast<Paladin>(*it) != nullptr)
+		{
+
+			PaladinC++;
+
+		}
+
+	}
+
+
+	output += MageC		> 0 ? std::to_string(MageCount) + " mages\n" : "No mages!\n";
+
+	output += RangerC	> 0 ? std::to_string(RangerC) + " rangers\n" : "No rangers!\n";
+
+	output += WarriorC	> 0 ? std::to_string(WarriorC) + " warriors\n" : "No warriors!\n";
+
+	output += PaladinC	> 0 ? std::to_string(PaladinC) + " paladins\n" : "No paladins!\n";
+
 	return output;
+
 }
 
-std::string Guild::AttackWithAllAdventurers()
+string Guild::AttackWithMages()
+
 {
-	std::string output = "You command everyone to attack! \n";
+
+	string output;
+
+	for (vector<shared_ptr<Adventurers>>::iterator it = _adventurers.begin(); it != _adventurers.end(); it++)
+	{
+
+		if (dynamic_pointer_cast<Mage>(*it))
+		{
+
+			output += (*it)->Attack();
+
+		}
+
+	}
+
+	return output;
+
+}
+
+
+
+string Guild::AttackWithPaladins()
+
+{
+
+	string output;
+
+	for (vector<shared_ptr<Adventurers>>::iterator it = _adventurers.begin(); it != _adventurers.end(); it++)
+	{
+
+		if (dynamic_pointer_cast<Paladin>(*it))
+		{
+
+			output += (*it)->Attack();
+
+		}
+
+	}
+
+	return output;
+
+}
+
+
+
+string Guild::AttackWithRangers()
+
+{
+
+	string output;
+
+	for (vector<shared_ptr<Adventurers>>::iterator it = _adventurers.begin(); it != _adventurers.end(); it++)
+	{
+
+		if (dynamic_pointer_cast<Ranger>(*it))
+		{
+
+			output += (*it)->Attack();
+
+		}
+
+	}
+
+	return output;
+
+}
+
+
+
+string Guild::AttackWithWarriors()
+
+{
+
+	string output;
+
+	for (vector<shared_ptr<Adventurers>>::iterator it = _adventurers.begin(); it != _adventurers.end(); it++)
+	{
+
+		if (dynamic_pointer_cast<Warrior>(*it))
+		{
+
+			output += (*it)->Attack();
+
+		}
+
+	}
+
+	return output;
+
+}
+
+
+
+
+string Guild::AttackWithAllAdventurers()
+{
+	string output = "You command everyone to attack! \n";
 
 	for (auto adventurer : _adventurers)
 	{
